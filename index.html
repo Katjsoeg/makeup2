@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative|Lato&display=swap" rel="stylesheet">
+    <title>Forside</title>
+
+    <style>
+        body {
+            margin: 0;
+
+        }
+
+
+        .logo {
+            position: absolute;
+            top: 1vw;
+            float: right;
+            flex-basis: 200px;
+            flex-grow: 1;
+            right: 1vw;
+        }
+
+        .logo img {
+            height: 60px;
+            width: 65px;
+        }
+
+
+
+        nav {
+            z-index: 3;
+            text-align: center;
+            width: 100%;
+            background-image: linear-gradient(to right, #a784ac, #c6aac9, #e0d4e2);
+            border: none;
+            height: 6vw;
+        }
+
+        .filter {
+            background-color: inherit;
+            color: white;
+            font-size: 14px;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-family: 'Lato', sans-serif;
+            text-transform: uppercase;
+            margin: 5px;
+        }
+
+
+        #splash {
+            width: 100%;
+            max-width: none;
+            height: 110vh;
+            background-image: url(splash.png);
+            background-size: cover;
+            background-position: 50% 0%;
+            position: absolute;
+        }
+
+        #box {
+            flex-wrap: wrap;
+            display: flex;
+            background-color: rgba(255, 255, 255, 0.81);
+            width: 60vw;
+            height: 36vw;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .inner_box {
+            height: 25vw;
+            width: 50vw;
+            background-color: transparent;
+            position: absolute;
+            border: solid rgba(0, 0, 0, 0.68) 2px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .text_box {
+            position: absolute;
+            height: 25vw;
+            width: 50vw;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(0, 0, 0, 0.68);
+        }
+
+        .text_box p {
+            font-family: 'Cinzel Decorative', cursive;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            font-size: 110px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .link_videre p {
+            font-size: 30px;
+            font-family: 'Lato', sans-serif;
+            top: 78%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .link_videre p:hover {
+            opacity: 0.5;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <nav>
+        <div class="logo">
+            <img src="colornb.svg" alt="logo">
+        </div>
+
+        <!--<button class="filter" data-kategori="alle">Alle</button>
+        <button class="filter" data-kategori="foundation">Foundation</button>
+        <button class="filter" data-kategori="øjenskygge">Øjenskygge</button>
+        <button class="filter" data-kategori="læbestift">Læbestift</button>
+        <button class="filter" data-kategori="lipgloss">Lipgloss</button>
+        <button class="filter" data-kategori="highlighter">Highlighter</button>
+        <button class="filter" data-kategori="blush">Blush</button>
+        <button class="filter" data-kategori="contour">Contour</button>
+        <button class="filter" data-kategori="mascara">Mascara</button>
+        <button class="filter" data-kategori="pudder">Pudder</button>-->
+
+    </nav>
+
+
+
+
+
+    <section id="splash">
+
+        <div id="box">
+            <div class="inner_box">
+                <div class="text_box">
+                    <p>FMK</p>
+                    <div class="link_videre">
+                        <a href="makeup.html">
+                            <p>&#8594; Se udvalg</p>
+                        </a></div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+</body>
+
+</html>

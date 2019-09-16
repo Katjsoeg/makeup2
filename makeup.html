@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative|Lato&display=swap" rel="stylesheet">
+    <title>FMK</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Lato', sans-serif;
+            background-image: url(background.jpg);
+            background-attachment: fixed;
+            background-position: center;
+            background-color: #cccccc;
+            background-size: cover;
+            width: 100%;
+
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .liste {
+            text-align: center;
+            display: grid;
+            grid-gap: 18px;
+            grid-template-columns: repeat(1, 1fr);
+            max-width: 980px;
+            margin: 0 auto;
+            color: white;
+            cursor: pointer;
+        }
+
+        article:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.30);
+
+        }
+
+        article:nth-child(odd) {
+            background-color: rgba(198, 170, 201, 0.56);
+
+        }
+
+        @media screen and (min-width:600px) {
+            .liste {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (min-width:960px) {
+            .liste {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+
+        h1 {
+            margin: 4vw;
+            text-align: center;
+            color: rgba(0, 0, 0, 0.60);
+        }
+
+
+        footer {
+            background-color: #b7b7b7;
+            width: 100%;
+            color: white;
+            margin-top: 2vw;
+            font-style: italic;
+        }
+
+        #footer_info {
+            flex-wrap: wrap;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .adresse,
+        .tider {
+            margin: 2vw;
+        }
+
+        header {
+            background-image: linear-gradient(to right, #a784ac, #c6aac9, #e0d4e2);
+            width: 100%;
+            font-family: 'Cinzel Decorative', cursive;
+            color: white;
+            font-size: 30px;
+            justify-content: center;
+            top: 0;
+        }
+
+        #headeren {
+            flex-wrap: wrap;
+            display: flex;
+        }
+
+        .logo {
+            position: absolute;
+            top: 1vw;
+            float: right;
+            flex-basis: 200px;
+            flex-grow: 1;
+            right: 1vw;
+        }
+
+        .logo img {
+            height: 105px;
+            width: 110px;
+        }
+
+        .overskrift {
+            justify-content: center;
+            flex-basis: 200px;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        #navbar {
+            text-align: center;
+            width: 100%;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45));
+
+        }
+
+        /* The sticky class is added to the navbar with JS when it reaches its scroll position */
+        .sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+        .sticky+.content {
+            padding-top: 60px;
+        }
+
+        .filter {
+            background-color: inherit;
+            color: white;
+            font-size: 14px;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-family: 'Lato', sans-serif;
+            text-transform: uppercase;
+            margin: 5px;
+        }
+
+        .filter:hover {
+            opacity: 0.2;
+        }
+
+
+        #popup {
+            position: fixed;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, .7);
+            display: none;
+            overflow: scroll;
+        }
+
+        .indhold {
+            width: 40vw;
+            min-height: 40vh;
+            margin: 4rem auto;
+            padding: 10px;
+            color: white;
+            text-align: center;
+        }
+
+        .indhold p {
+            margin: 1vw;
+        }
+
+
+        .luk {
+            position: fixed;
+            right: 0;
+            font-size: 2rem;
+            cursor: pointer;
+            background-color: transparent;
+            color: white;
+            border-radius: 50%;
+            border: none;
+        }
+
+        .luk:hover {
+            background-color: rgba(0, 0, 0, .4);
+        }
+
+        .ingredienser {
+            font-size: 10px;
+        }
+
+        @media screen and (max-width: 700px) {
+            .indhold {
+                width: 65%;
+            }
+
+            .liste {
+                margin: 3vw;
+            }
+        }
+
+        @media screen and (max-width: 598px) {
+            .logo {
+                display: none;
+            }
+
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+    <section id="navigationen">
+
+        <header>
+            <div id="headeren">
+                <div class="overskrift">
+                    <h2>FMK</h2>
+                </div>
+                <div class="logo">
+                    <a href="index.html"><img src="colornb.svg" alt="logo"></a>
+                </div>
+            </div>
+        </header>
+
+        <nav id="navbar">
+
+            <button class="filter" data-kategori="alle">Alle</button>
+            <button class="filter" data-kategori="foundation">Foundation</button>
+            <button class="filter" data-kategori="øjenskygge">Øjenskygge</button>
+            <button class="filter" data-kategori="læbestift">Læbestift</button>
+            <button class="filter" data-kategori="lipgloss">Lipgloss</button>
+            <button class="filter" data-kategori="highlighter">Highlighter</button>
+            <button class="filter" data-kategori="blush">Blush</button>
+            <button class="filter" data-kategori="contour">Contour</button>
+            <button class="filter" data-kategori="mascara">Mascara</button>
+            <button class="filter" data-kategori="pudder">Pudder</button>
+
+        </nav>
+
+
+    </section>
+
+
+
+
+    <h1>Alle</h1>
+    <template>
+
+        <article>
+
+            <img src="" alt="">
+            <h2></h2>
+            <h3></h3>
+            <p class="pris"></p>
+
+
+        </article>
+    </template>
+
+    <div id="popup">
+        <button class="luk">X</button>
+        <section class="indhold">
+            <article class="menu">
+                <img class="billede" src="" alt="">
+                <h2></h2>
+                <h3></h3>
+                <p class="pris"></p>
+                <p class="viden"></p>
+                <p>Ingrediens</p>
+                <p class="ingredienser"></p>
+
+            </article>
+        </section>
+    </div>
+
+    <section class="liste"></section>
+
+    <footer>
+        <div id="footer_info">
+            <div class="adresse">
+                <p><b>Adresse:</b></p>
+                <p>Lygten 16</p>
+                <p>København NV</p>
+            </div>
+            <div class="tider">
+                <p><b>Kontakt:</b></p>
+                <p>Mail: fmk@live.dk</p>
+                <p>Telefon: +45 12345678</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let makeup;
+        const temp = document.querySelector("template");
+        const listeMakeup = document.querySelector(".liste");
+        const theTemplatePointer = document.querySelector("#theTemplate");
+        let filter = "alle";
+
+
+        document.addEventListener("DOMContentLoaded", getJson);
+
+        async function getJson() {
+            let jsonData = await fetch("https://spreadsheets.google.com/feeds/list/14LiOhKxoK7RxtfsWL1sBrwbQIlCGx_ndJECwkmjlrBo/od6/public/values?alt=json");
+            console.log("jsonData", jsonData);
+            makeup = await jsonData.json();
+            console.log("makeup", makeup);
+            addEventListenersToButtons();
+            start();
+        }
+
+
+        function start() {
+            listeMakeup.innerHTML = "";
+
+            makeup.feed.entry.forEach((makeup) => {
+                if (filter == "alle" || filter == makeup.gsx$kategori.$t) {
+                    const klon = temp.cloneNode(true).content;
+                    klon.querySelector("h2").textContent = makeup.gsx$mærke.$t;
+                    klon.querySelector("h3").textContent = makeup.gsx$navn.$t;
+                    klon.querySelector(".pris").textContent = `${makeup.gsx$pris.$t},-`;
+                    klon.querySelector("img").src = `billeder/${makeup.gsx$billede.$t}.jpg`;
+                    listeMakeup.appendChild(klon);
+                    listeMakeup.lastElementChild.addEventListener("click", () => {
+                        visSingle(makeup);
+                    });
+                }
+            })
+        }
+
+        function visSingle(makeup) {
+            document.querySelector("#popup").style.display = "block";
+            document.querySelector("#popup .luk").addEventListener("click", lukSingle);
+
+            document.querySelector(".menu h2").textContent = makeup.gsx$mærke.$t;
+            document.querySelector(".menu h3").textContent = makeup.gsx$navn.$t;
+            document.querySelector(".menu .pris").textContent = `${makeup.gsx$pris.$t},-`;
+            document.querySelector(".menu .viden").textContent = makeup.gsx$info.$t;
+            document.querySelector(".menu .ingredienser").textContent = makeup.gsx$ingredienser.$t;
+            document.querySelector(".menu img").src = `billeder/${makeup.gsx$billede.$t}.jpg`;
+        }
+
+        function lukSingle() {
+            document.querySelector("#popup").style.display = "none";
+        }
+
+        function addEventListenersToButtons() {
+            document.querySelectorAll(".filter").forEach(elm => {
+                elm.addEventListener("click", filtrering);
+            })
+        }
+
+
+
+        function filtrering() {
+            filter = this.dataset.kategori;
+            document.querySelector("h1").textContent = this.textContent;
+            document.querySelectorAll(".filter").forEach(elm => {
+                elm.classList.remove("valgt");
+            })
+
+            start();
+        }
+
+
+        // When the user scrolls the page, execute myFunction
+        window.onscroll = function() {
+            myFunction()
+        };
+
+        // Get the navbar
+        var navbar = document.getElementById("navbar");
+
+        // Get the offset position of the navbar
+        var sticky = navbar.offsetTop;
+
+        // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+        function myFunction() {
+            if (window.pageYOffset >= sticky) {
+                navbar.classList.add("sticky")
+            } else {
+                navbar.classList.remove("sticky");
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>
