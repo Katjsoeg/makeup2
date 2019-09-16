@@ -214,13 +214,83 @@
             }
         }
 
-        @media screen and (max-width: 598px) {
+        @media screen and (max-width: 600px) {
             .logo {
                 display: none;
             }
 
+            #navbar {
+                display: none;
+            }
         }
 
+        /* The side navigation menu */
+        .sidenav {
+            margin: 0px;
+            height: 100%;
+            width: 0;
+            /* 0 width - change this with JavaScript */
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            overflow-x: hidden;
+            /* Disable horizontal scroll */
+            transition: 0.5s;
+            z-index: 3;
+            font-family: 'lato', serif;
+            overflow: scroll;
+
+        }
+
+        /* The navigation menu links */
+        .sidenav a {
+            background-color: transparent;
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #7f8486;
+        }
+
+        button {
+            border: none;
+            background: none;
+
+        }
+
+        /* Position and style the close button (top right corner) */
+        .sidenav .closebtn {
+            font-size: 70px;
+            width: 85%;
+            text-align: right;
+            padding: 0px 0px 0px 20px;
+        }
+
+        #menu {
+            font-size: 30px;
+            margin: 0px;
+            text-align: end;
+            padding: 25px 25px 0px 0px;
+            cursor: pointer;
+        }
+
+        #kryds {
+            cursor: pointer;
+        }
+
+        @media screen and (min-width: 600px) {
+            #menu {
+                display: none;
+            }
+
+        }
     </style>
 
 
@@ -228,10 +298,28 @@
 </head>
 
 <body>
+    <div id="mySidenav" class="sidenav">
+        <a id="kryds" class="closebtn">&times;</a>
+        <a href="index.html">FORSIDE</a>
+        <a class="filter" data-kategori="alle">Alle</a>
+        <a class="filter" data-kategori="foundation">Foundation</a>
+        <a class="filter" data-kategori="øjenskygge">Øjenskygge</a>
+        <a class="filter" data-kategori="læbestift">Læbestift</a>
+        <a class="filter" data-kategori="lipgloss">Lipgloss</a>
+        <a class="filter" data-kategori="highlighter">Highlighter</a>
+        <a class="filter" data-kategori="blush">Blush</a>
+        <a class="filter" data-kategori="contour">Contour</a>
+        <a class="filter" data-kategori="mascara">Mascara</a>
+        <a class="filter" data-kategori="pudder">Pudder</a>
+    </div>
+
 
     <section id="navigationen">
 
         <header>
+            <div class="menu">
+                <p id="menu">&#9776;</p>
+            </div>
             <div id="headeren">
                 <div class="overskrift">
                     <h2>FMK</h2>
@@ -321,6 +409,8 @@
 
         document.addEventListener("DOMContentLoaded", getJson);
 
+        document.querySelector("#menu").addEventListener("click", openNav);
+
         async function getJson() {
             let jsonData = await fetch("https://spreadsheets.google.com/feeds/list/14LiOhKxoK7RxtfsWL1sBrwbQIlCGx_ndJECwkmjlrBo/od6/public/values?alt=json");
             console.log("jsonData", jsonData);
@@ -404,6 +494,18 @@
             }
         }
 
+        /* Set the width of the side navigation to 250px */
+        function openNav() {
+            console.log("yo");
+            document.querySelector("#mySidenav").style.width = "250px";
+            document.querySelector("#kryds").addEventListener("click", closeNav)
+        }
+
+        /* Set the width of the side navigation to 0 */
+        function closeNav() {
+            document.querySelector("#mySidenav").style.width = "0";
+            document.querySelector("#menu").addEventListener("click", openNav)
+        }
     </script>
 
 
