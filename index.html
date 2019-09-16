@@ -16,7 +16,7 @@
 
         .logo {
             position: absolute;
-            top: 1vw;
+            top: 0.5vw;
             float: right;
             flex-basis: 200px;
             flex-grow: 1;
@@ -75,17 +75,21 @@
         }
 
         .inner_box {
+            flex-wrap: wrap;
+            display: flex;
             height: 25vw;
             width: 50vw;
             background-color: transparent;
             position: absolute;
-            border: solid rgba(0, 0, 0, 0.68) 2px;
+            border: solid rgba(0, 0, 0, 0.60) 2px;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
         }
 
         .text_box {
+            flex-wrap: wrap;
+            display: flex;
             position: absolute;
             height: 25vw;
             width: 50vw;
@@ -96,6 +100,8 @@
         }
 
         .text_box p {
+            display: flex;
+            flex-wrap: wrap;
             font-family: 'Cinzel Decorative', cursive;
             top: 50%;
             left: 50%;
@@ -107,6 +113,8 @@
         }
 
         .link_videre p {
+            flex-wrap: wrap;
+            display: flex;
             font-size: 30px;
             font-family: 'Lato', sans-serif;
             top: 78%;
@@ -116,6 +124,30 @@
 
         .link_videre p:hover {
             opacity: 0.5;
+        }
+
+        @media only screen and (min-width: 750px) and (max-width: 1200px) {
+
+            .text_box p {
+                font-size: 74px;
+            }
+
+            .link_videre p {
+                font-size: 20px;
+            }
+
+
+        }
+
+        @media only screen and (min-width: 321px) and (max-width: 750px) {
+
+            .text_box p {
+                font-size: 60px;
+            }
+
+            .link_videre p {
+                font-size: 15px;
+            }
         }
     </style>
 </head>
