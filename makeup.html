@@ -20,6 +20,7 @@
             margin: 0;
             font-family: 'Lato', sans-serif;
             background-image: url(background_opacity.jpg);
+            /* sørger for at baggrundsbilledet sidder fast, og ikke scroller med*/
             background-attachment: fixed;
             background-position: center;
             background-size: cover;
@@ -35,6 +36,7 @@
             text-align: center;
             display: grid;
             grid-gap: 18px;
+            /*i mobile version er der 1 kolonne*/
             grid-template-columns: repeat(1, 1fr);
             max-width: 980px;
             margin: 0 auto;
@@ -42,11 +44,13 @@
             cursor: pointer;
         }
 
+        /*sætter farven på de lige articler*/
         article:nth-child(even) {
             background-color: rgba(0, 0, 0, 0.30);
 
         }
 
+        /*sætter farven på de ulige articler*/
         article:nth-child(odd) {
             background-color: rgba(198, 170, 201, 0.60);
 
@@ -56,12 +60,14 @@
             transform: scale(0.92);
         }
 
+        /*når skærmen er større end 600px, vil der være 2 kolonner */
         @media screen and (min-width:600px) {
             .liste {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
+        /*når skærmen er større end 960px, vil der være 3 kolonner */
         @media screen and (min-width:960px) {
             .liste {
                 grid-template-columns: repeat(3, 1fr);
@@ -112,11 +118,9 @@
         }
 
         .logo {
+            /*placerer logoet ude til højre, med 1vw fra top og højre*/
             position: absolute;
             top: 1vw;
-            float: right;
-            flex-basis: 200px;
-            flex-grow: 1;
             right: 1vw;
         }
 
@@ -136,8 +140,7 @@
             text-align: center;
             width: 100%;
             background-image: linear-gradient(to right, rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50));
-            z-index: 3;
-
+            z-index: 2;
         }
 
         /* The sticky class is added to the navbar with JS when it reaches its scroll position */
@@ -177,6 +180,7 @@
             background-color: rgba(0, 0, 0, .7);
             display: none;
             z-index: 3;
+            /*gør så man kan scrolle på pop up, og læse resterende info*/
             overflow: scroll;
         }
 
@@ -196,6 +200,7 @@
 
         .luk {
             position: fixed;
+            /*sætter krydset i øverste højre hjørne*/
             right: 0;
             font-size: 2rem;
             cursor: pointer;
@@ -223,6 +228,7 @@
             }
         }
 
+        /*fjerner logo og navigationen når den rammer skærmstørrelse mindre end 600px*/
         @media screen and (max-width: 600px) {
             .logo {
                 display: none;
@@ -294,6 +300,7 @@
             cursor: pointer;
         }
 
+        /*når skærmen er større end 600px, vil burger menuen være skjult*/
         @media screen and (min-width: 600px) {
             #menu {
                 display: none;
@@ -307,6 +314,8 @@
 </head>
 
 <body>
+
+    <!--burger menuen som kun er vist i mindre skærmstørrelse-->
     <div id="mySidenav" class="sidenav">
         <a id="kryds" class="closebtn">&times;</a>
         <a href="index.html">FORSIDE</a>
@@ -326,9 +335,12 @@
     <section id="navigationen">
 
         <header>
+
+            <!--burger menu ikonet; så den ikke sidder uden for headeren-->
             <div class="menu">
                 <p id="menu">&#9776;</p>
             </div>
+
             <div id="headeren">
                 <div class="overskrift">
                     <h2>FMK</h2>
@@ -339,6 +351,7 @@
             </div>
         </header>
 
+        <!--navigationen som vises i større skærmtyper-->
         <nav id="navbar">
 
             <button class="filter" data-kategori="alle">Alle</button>
@@ -361,22 +374,24 @@
 
 
     <h1>Alle</h1>
+
+
     <template>
-
+        <!--de informationer der skal vises på den generelle side-->
         <article>
-
             <img src="" alt="">
             <h2></h2>
             <h3></h3>
             <p class="pris"></p>
 
-
         </article>
     </template>
+
 
     <div id="popup">
         <button class="luk">X</button>
         <section class="indhold">
+            <!--de informationer der skal vises når pop up bliver åbnet-->
             <article class="menu">
                 <img class="billede" src="" alt="">
                 <h2></h2>
@@ -409,20 +424,26 @@
     </footer>
 
     <script>
+        //der hvor produkterne fra json-filen lægges
         let makeup;
         const temp = document.querySelector("template");
+        //vi tilkalder den tomme liste som skal fyldes ud med produkter
         const listeMakeup = document.querySelector(".liste");
         const theTemplatePointer = document.querySelector("#theTemplate");
+        //alle produkter vises til at starte med
         let filter = "alle";
 
-
+        //Når DOM er indlæst, kan siden gå i gang
         document.addEventListener("DOMContentLoaded", getJson);
 
+        //når der klikkes på burger menuen, går den ned til funktionen openNav
         document.querySelector("#menu").addEventListener("click", openNav);
 
         async function getJson() {
+            //json files læses og hentes og produkterne lægges i den tomme "let makeup;"
             let jsonData = await fetch("https://spreadsheets.google.com/feeds/list/14LiOhKxoK7RxtfsWL1sBrwbQIlCGx_ndJECwkmjlrBo/od6/public/values?alt=json");
             console.log("jsonData", jsonData);
+            //vi kalder på makeup, det tomme array, og kalder på den første function "start()"
             makeup = await jsonData.json();
             console.log("makeup", makeup);
             addEventListenersToButtons();
@@ -431,16 +452,22 @@
 
 
         function start() {
+            //Listen med makeup nulstilles
             listeMakeup.innerHTML = "";
 
+            //Her gennemgåes hvert makeup produkt, og der tilføjes en article for hvert produkt der hentes.
             makeup.feed.entry.forEach((makeup) => {
                 if (filter == "alle" || filter == makeup.gsx$kategori.$t) {
                     const klon = temp.cloneNode(true).content;
+                    //Her tilføjes de informationer der skal være i article, og bliver tildelt en klasse, et tag osv.
                     klon.querySelector("h2").textContent = makeup.gsx$mærke.$t;
                     klon.querySelector("h3").textContent = makeup.gsx$navn.$t;
                     klon.querySelector(".pris").textContent = `${makeup.gsx$pris.$t},-`;
                     klon.querySelector("img").src = `billeder/${makeup.gsx$billede.$t}.jpg`;
+
+                    //Listen/Alt dataen bliver klonet til pop up siden
                     listeMakeup.appendChild(klon);
+                    //Når der klikkes på et produkt, går den ned til funktionen visSingle(makeup)
                     listeMakeup.lastElementChild.addEventListener("click", () => {
                         visSingle(makeup);
                     });
@@ -449,9 +476,12 @@
         }
 
         function visSingle(makeup) {
+            //pop up vinduet vises
             document.querySelector("#popup").style.display = "block";
+            //når der trykkes på .luk, lukkes vinduet
             document.querySelector("#popup .luk").addEventListener("click", lukSingle);
 
+            //her tilføjes de informationer der skal være i .indhold
             document.querySelector(".menu h2").textContent = makeup.gsx$mærke.$t;
             document.querySelector(".menu h3").textContent = makeup.gsx$navn.$t;
             document.querySelector(".menu .pris").textContent = `${makeup.gsx$pris.$t},-`;
@@ -461,10 +491,12 @@
         }
 
         function lukSingle() {
+            //pop up siden vises ikke længere
             document.querySelector("#popup").style.display = "none";
         }
 
         function addEventListenersToButtons() {
+            //det tilføjes klik på alle .filter klasserne, og sendes derefter ned til funktionen filtrering()
             document.querySelectorAll(".filter").forEach(elm => {
                 elm.addEventListener("click", filtrering);
             })
@@ -473,6 +505,8 @@
 
 
         function filtrering() {
+
+            //h1 overskriften ændrer sig efter hvad kategori der bliver trykket på
             filter = this.dataset.kategori;
             document.querySelector("h1").textContent = this.textContent;
             document.querySelectorAll(".filter").forEach(elm => {
@@ -502,6 +536,7 @@
                 navbar.classList.remove("sticky");
             }
         }
+
 
         /* Set the width of the side navigation to 250px */
         function openNav() {
